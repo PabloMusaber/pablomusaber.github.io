@@ -10,6 +10,19 @@
   }
 }
 
+small {
+  font-size: 10px;
+  a:link {
+    font-weight: 600;
+  }
+
+  a:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   #attribution {
     writing-mode: vertical-rl;
