@@ -9,9 +9,10 @@
 }
 
 #theme-toggler:before {
-  @include themed(content, "🌙", "🌞");
+  @include themed(content, "\f186", "\f185");
+  font-family: "Font Awesome 5 Free"; /* Asegúrate de tener la fuente de Font Awesome cargada */
+  font-weight: 900; /* Puede variar según la versión de Font Awesome que estés utilizando */
 }
-
 .navbar-themed {
   .navbar-brand,
   .navbar-nav .nav-link.active {
@@ -30,4 +31,3 @@
 .bg-themed {
   @include themed(background-color, $light, $dark);
 }
-
