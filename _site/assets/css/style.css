@@ -359,8 +359,9 @@ small a:visited { text-decoration: inherit; color: inherit; cursor: auto; }
 .highlight .cpf, [data-theme="dark"] pre .cpf, [data-theme="dark"] code.highlighter-rouge .cpf { color: #aaaaaa; font-style: italic; }
 
 /* Comment.PreprocFile */
-[data-theme="light"] #theme-toggler:before { content: "🌙"; }
-[data-theme="dark"] #theme-toggler:before { content: "🌞"; }
+#theme-toggler:before { font-family: "Font Awesome 5 Free"; /* Asegúrate de tener la fuente de Font Awesome cargada */ font-weight: 900; /* Puede variar según la versión de Font Awesome que estés utilizando */ }
+[data-theme="light"] #theme-toggler:before { content: ""; }
+[data-theme="dark"] #theme-toggler:before { content: ""; }
 
 [data-theme="light"] .navbar-themed .navbar-brand, [data-theme="light"] .navbar-themed .navbar-nav .nav-link.active { color: #343a40; }
 [data-theme="dark"] .navbar-themed .navbar-brand, [data-theme="dark"] .navbar-themed .navbar-nav .nav-link.active { color: rgba(255, 255, 255, 0.9); }
