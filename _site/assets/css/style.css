@@ -134,7 +134,12 @@ small a:visited { text-decoration: inherit; color: inherit; cursor: auto; }
 .nav-item.active { font-weight: bold; }
 .nav-item.active::after { width: 100% !important; }
 
+.navbar-brand { margin-right: 0; }
 .navbar-brand::after { margin-top: -0.25em; }
+
+[data-theme="light"] #theme-toggler { display: block; padding: 0.5rem 1rem; margin-bottom: 0.2rem; color: rgba(52, 58, 64, 0.5); }
+
+[data-theme="dark"] #theme-toggler { display: block; padding: 0.5rem 1rem; margin-bottom: 0.2rem; color: rgba(255, 255, 255, 0.5); }
 
 .markdown-body h1, .markdown-body h2 { margin-top: 32px; }
 .markdown-body hr { background: #6c757d; }

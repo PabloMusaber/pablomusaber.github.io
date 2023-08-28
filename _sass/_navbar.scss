@@ -28,7 +28,26 @@
 }
 
 .navbar-brand {
+  margin-right: 0;
   &::after {
     margin-top: -0.25em;
+  }
+}
+
+[data-theme="light"] {
+  #theme-toggler {
+    display: block;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.2rem;
+    color: rgba(52, 58, 64, 0.5);
+  }
+}
+
+[data-theme="dark"] {
+  #theme-toggler {
+    display: block;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.2rem;
+    color: rgba(255, 255, 255, 0.5);
   }
 }

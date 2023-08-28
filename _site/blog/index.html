@@ -52,9 +52,13 @@
   <main class="flex-shrink-0 container mt-5">
     <nav class="navbar navbar-expand-lg navbar-themed">
 
-  <a class="navbar-brand" href="/">
-    <h5><b>Pablo Musaber</b></h5>
-  </a>
+  <div class="d-flex align-items-center"> <!-- Agregar un contenedor flexible -->
+    <a class="navbar-brand" href="/">
+      <h5><b>Pablo Musaber</b></h5>
+    </a>
+
+    <span id="theme-toggler" class="nav-item" role="button" onclick="toggleTheme()"></span>
+  </div>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <i class="fas fa-1x fa-bars text-themed"></i>
@@ -76,7 +80,6 @@
 
       
 
-      <span id="theme-toggler" class="nav-item nav-link" role="button" onclick="toggleTheme()"></span>
     </div>
   </div>
 
