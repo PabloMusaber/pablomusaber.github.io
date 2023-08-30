@@ -27,27 +27,29 @@
     }
   }
 
-  a:not(.btn):not([class^="carousel-"]):not([class^="list-"]):not(.no-underline) {
+  a:not(.btn):not([class^="carousel-"]):not([class^="list-"]):not(
+      .no-underline
+    ) {
     display: inline-block;
     text-decoration: none;
 
-    &:hover {
-      color: $primary;
-    }
+    // &:hover {
+    //   color: $primary;
+    // }
 
-    &::after {
-      content: "";
-      display: block;
-      height: 0.15em;
-      margin-top: -0.15em;
-      width: 0;
-      background: $primary;
-      transition: width 0.35s;
-    }
+    // &::after {
+    //   content: "";
+    //   display: block;
+    //   height: 0.15em;
+    //   margin-top: -0.15em;
+    //   width: 0;
+    //   background: $primary;
+    //   transition: width 0.35s;
+    // }
 
-    &:hover::after {
-      width: 100%;
-    }
+    // &:hover::after {
+    //   width: 100%;
+    // }
   }
 
   pre {
