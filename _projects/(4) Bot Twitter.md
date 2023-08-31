@@ -1,7 +1,7 @@
 ---
 name: Bot de Twitter
 tools: [Python]
-image: ../assets/img/projects/bot_twitter.jpg
+image: ../assets/img/projects/bot_twitter/portada.jpg
 description: Tiene la capacidad de postear frases e imágenes de manera periódica y aleatoria, haciendo de uso de la API de Twitter.
 ---
 
@@ -11,7 +11,7 @@ El proyecto nació con el propósito de ser destinado a publicar citas e imágen
 
 <br>
 
-![perfil](../assets/img/projects/charly_bot.jpg)
+![perfil](../assets/img/projects/bot_twitter/charly_bot.jpg)
 
 <br>
 

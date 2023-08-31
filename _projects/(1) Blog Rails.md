@@ -1,7 +1,7 @@
 ---
 name: Blog con Ruby on Rails
 tools: [Ruby, Rails, HTML, CSS]
-image: ../assets/img/projects/ruby_on_rails.jpg
+image: ../assets/img/projects/blog_rails/portada.jpg
 description: Plataforma web desarrollada con el objetivo de aprender la tecnología. Permite a usuarios registrarse, comentar y publicar artículos.
 ---
 
