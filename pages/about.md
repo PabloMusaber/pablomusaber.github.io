@@ -22,13 +22,11 @@ Tengo un especial interés por la **creación de aplicaciones y la automatizaci�
 <br>
 <br>
 
-<!-- ### Trayectoria DESCOMENTAR CUANDO ESTÉ OFICIAL EN ALDIBS
-
+<!-- ### Trayectoria
 <div class="row">
 {% include about/timeline.html %}
 </div>
 <br> -->
 
 <!-- ### Offline
-
-En mis tiempos libres me gusta jugar y ver fútbol. Soy fanático del café y me encanta la música, sobre todo el rock. -->
+ -->

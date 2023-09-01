@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<!--
+  portfolYOU Jekyll theme by Youssef Raafat
+  Free for personal and commercial use under the MIT license
+  https://github.com/YoussefRaafatNasry/portfolYOU
+-->
+
+<html lang="en" class="h-100">
+
+<head>
+
+  
+  
+  
+
+  
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Blog con Ruby on Rails">
+  <meta property="og:description" content="Plataforma web desarrollada con el objetivo de aprender la tecnología. Permite a usuarios registrarse, comentar y publicar artículos.">
+  <meta property="og:image" content="../assets/img/projects/blog_rails/portada2.jpg">
+
+  <title>Blog con Ruby on Rails</title>
+  <meta name="description" content="Plataforma web desarrollada con el objetivo de aprender la tecnología. Permite a usuarios registrarse, comentar y publicar artículos.">
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
+
+  <!-- Theme style -->
+  <script src="/assets/js/theme.js"></script>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+
+  <!-- Animate CSS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+
+<body class="h-100 d-flex flex-column">
+
+  <main class="flex-shrink-0 container mt-5">
+    <nav class="navbar navbar-expand-lg navbar-themed">
+
+  <div class="d-flex align-items-center"> <!-- Agregar un contenedor flexible -->
+    <a class="navbar-brand" href="/">
+      <h5><b>Pablo Musaber</b></h5>
+    </a>
+
+    <span id="theme-toggler" class="nav-item" role="button" onclick="toggleTheme()"></span>
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-1x fa-bars text-themed"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto"><a class="nav-item nav-link active" href="/projects/">Projects</a>
+
+      <a class="nav-item nav-link " href="/about/">About</a>
+
+      <a class="nav-item nav-link " href="https://github.com/PabloMusaber"target="_blank"><i class="fab fa-1x fa-github"></i></a>
+
+      <a class="nav-item nav-link " href="https://www.linkedin.com/in/pablo-musaber/"target="_blank"><i class="fab fa-linkedin-in"></i></a>
+
+      <a class="nav-item nav-link " href="mailto:musaberpablo@gmail.com"target="_blank"><i class="fas fa-envelope"></i></a>
+
+      
+
+    </div>
+  </div>
+
+</nav>
+    <div class="col-lg-10 mx-auto mt-5 markdown-body">
+  <h1 id="blog-con-ruby-on-rails">Blog con Ruby on Rails<a href="https://github.com/PabloMusaber/blog-rails" style="color: #6c757d" onmouseover="this.style.color='#333333'" onmouseout="this.style.color='#6c757d'" target="githubWindow"><i class="fab fa-github"></i></a></h1>
+
+<p>Este proyecto es muy sencillo, y fue desarrollado para aprender y practicar con <strong>Ruby on Rails</strong>. Utiliza las versiones:</p>
+
+<ul>
+  <li><strong>Ruby</strong>: 2.7.0</li>
+  <li><strong>Rails</strong>: 6.1.4</li>
+</ul>
+
+<p>Además, las gemas utilizadas son:</p>
+
+<ul>
+  <li><strong>simple_form</strong>: Simplifica la creación de formularios y la visualización de errores en los campos correspondientes.</li>
+  <li><strong>devise</strong>: Provee autenticación de usuarios con registro, inicio de sesión, recuperación de contraseñas, manejo de sesiones y eliminación de cuentas.</li>
+  <li><strong>bootstrap</strong>: Framework de diseño.</li>
+  <li><strong>font-awesome-sass</strong>: Provee una amplia colección de iconos, utilizados principalmente en los botones de la aplicación.</li>
+  <li><strong>wicked_pdf</strong>: Permite la generación de archivos PDF a partir de vistas HTML.</li>
+  <li><strong>rubocop</strong>: Analizador y formateador de código Ruby.</li>
+</ul>
+
+<p><br /></p>
+
+<p>Al levantar el proyecto, y luego de iniciar sesión, el usuario puede observar la lista de sus artículos creados en forma de tarjetas. Se aprecia el título, las categorías a las que pertenece dicho artículo, la fecha de creación y la foto de perfil del autor.
+<img src="../assets/img/projects/blog_rails/blog1.jpg" alt="blog-rails" />
+<br /></p>
+
+<p>El presioanr sobre el botón de “Exportar artículos como PDF”, un usuario puede generar un archivo de dicho formato con todo el listado de sus artículos publicados.
+<img src="../assets/img/projects/blog_rails/blog2.jpg" alt="blog-rails" />
+<br /></p>
+
+<p>Además, el autor de un artículo es el único usuario capaz de editar o eliminar dicho elemento, y por ende es el único capaz de visualizar los botones que permiten estas funciones.
+<img src="../assets/img/projects/blog_rails/blog3.jpg" alt="blog-rails" />
+<br /></p>
+
+<p>Los artículos pueden ser comentados por cualqueir usuario, como se observa a continuación.
+<img src="../assets/img/projects/blog_rails/blog4.jpg" alt="blog-rails" />
+<br /></p>
+
+<p>Por último quiero destacar, entre otras funcionalidades, la gestión de la cuenta de usuario, la cual se realiza gracias a la implementación de la gema <strong>Devise</strong>. Permite realizar cambios de datos personales y de foto de perfil, utilizando la contraseña para confirmar los cambios. Además, también facilita las opciones de cambio de contraseña y de eliminación de cuenta.</p>
+
+<script src="https://cdn.jsdelivr.net/gh/eddymens/markdown-external-link-script@v2.0.0/main.min.js"></script>
+
+
+</div>
+  </main>
+  <footer class="mt-auto py-3 text-center">
+
+  <small class="text-muted mb-2">
+    Using the <a href="https://jekyllrb.com/" target=”jekyll”>Jekyll</a> theme <a
+      href="https://github.com/YoussefRaafatNasry/portfolYOU" target=”portfolYOU”>portfolYOU</a>&nbsp; - &nbsp;
+    <i class="fas fa-code"></i> <strong>Pablo Musaber</strong>
+  </small>
+
+</footer>
+
+  
+  <!-- GitHub Buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- jQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS CDN -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- wow.js CDN & Activation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+<script> new WOW().init(); </script>
+
+<!-- Initialize all tooltips -->
+<script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+</body>
+
+</html>

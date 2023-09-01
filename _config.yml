@@ -3,8 +3,8 @@ title: Pablo Musaber
 description: >-
   Estudiante de último año de Ingeniería en Sistemas de Información :computer:
 baseurl:
-repository: YoussefRaafatNasry/portfolYOU # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
-remote_theme: YoussefRaafatNasry/portfolYOU
+repository: PabloMusaber/pablomusaber.github.io # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
+remote_theme:
 open_new_tab: true # Opens external URLs in new tab (works for posts, projects and navbar only)
 
 ### Plugins ###
