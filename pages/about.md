@@ -5,16 +5,30 @@ permalink: /about/
 weight: 3
 ---
 
-# **About Me**
+# **Sobre mi**
 
-Hi I am **{{ site.author.name }}** :wave:,<br>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Mi nombre es **{{ site.author.name }}**, soy estudiante de Ingeniería en Sistemas en la Universidad Tecnológica Nacional y vivo en Mendoza, Argentina.
 
-<div class="row">
-{% include about/skills.html title="Programming Skills" source=site.data.programming-skills %}
-{% include about/skills.html title="Other Skills" source=site.data.other-skills %}
+Soy una persona proactiva y comunicativa, con excelentes habilidades comunicativas. Disfruto del trabajo en equipo y de colaborar en la resolución de problemas.
+
+Tengo un especial interés por la **creación de aplicaciones y la automatización de procesos**, lo que me llevó a aprender el stack tecnológico que domino actualmente.
+
+<br>
+### Tecnologías
+
+<div class="mt-4">
+{% include about/technologies.html %}
 </div>
+<br>
+<br>
+
+<!-- ### Trayectoria DESCOMENTAR CUANDO ESTÉ OFICIAL EN ALDIBS
 
 <div class="row">
 {% include about/timeline.html %}
 </div>
+<br> -->
+
+<!-- ### Offline
+
+En mis tiempos libres me gusta jugar y ver fútbol. Soy fanático del café y me encanta la música, sobre todo el rock. -->
