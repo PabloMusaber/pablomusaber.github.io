@@ -7,7 +7,7 @@ description: A partir de web scraping permite obtener las noticias principales d
 
 # Bot de Telegram <a href="https://github.com/PabloMusaber/telegram-bot-noticias" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="githubWindow"><i class="fab fa-github"></i></a>
 
-Este bot responde a comandos enviados a través del chat, y lo utilizaba durante mis horas de cursado para obtener las noticias principales de Xataka, iProUP e Infobae utilizando scripts de **web scraping**. Ya no se encuentra publicamente debido a que dejé de utilizarlo.
+Este bot responde a comandos enviados a través del chat, y era empleado para obtener las noticias principales de Xataka, iProUP e Infobae a partir de scripts de **web scraping**. Actualmente se encuentra fuera de servicio debido a que ya no lo utilizo.
 
 Las noticias pueden solicitarse a partir de la interacción con los botones que aparecen con el comando **"/noticias"**.
 ![noticias](../assets/img/projects/blog_telegram/noticias.jpg)
