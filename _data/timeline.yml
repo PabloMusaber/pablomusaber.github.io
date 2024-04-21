@@ -1,13 +1,23 @@
-- title: Software Engineer, Google, UK
-  from: 2018
-  to: present
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-    nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+- company: Bromus Software
+  role: Desarrollador Fullstack
+  from: Febrero 2024
+  to: Actualidad
+  description: Actualmente me encuentro trabajando como desarrollador fullstack utilizando .NET Core y Angular.
 
-- title: Ing. en Sistemas de Información, UTN FRM
+- company: Aldibs Software Solutions
+  role: Pasante | Desarrollador part time
+  from: Julio 2023
+  to: Enero 2024 · 7 meses
+  description: A mediados de mi último año de ingeniería comencé mi carrera como desarrollador 
+    ingresando como pasante en una software factory de mi ciudad, donde tuve la oportunidad de trabajar en 
+    diversos proyectos utilizando las tecnologías Ruby on Rails, Java y AngularJS.
+
+- company: Microblue Computación
+  role: Técnico de Computación
   from: 2019
-  to: 2023
-  description: Actualmente me encuentro realizando el proyecto final de la carrera.
+  to: Junio de 2023 · 4 años
+  description: Durante todos mis años de estudio universitario, trabajé a tiempo parcial en un taller de
+    computación, brindando servicio técnico de computadoras, notebooks e impresoras. Esta experiencia me permitió
+    desarrollar competencias ligadas a la resolución de problemas, así como también
+    habilidades relacionadas con la comunicación, el trabajo en equipo y el diálogo
+    con clientes.
