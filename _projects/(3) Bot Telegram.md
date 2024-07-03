@@ -1,24 +1,24 @@
 ---
-name: Bot de Telegram
+name: Telegram Bot
 tools: [Python]
 image: ../assets/img/projects/blog_telegram/portada.jpg
-description: A partir de web scraping permite obtener las noticias principales de ciertos sitios que son de mi interés personal.
+description: It uses web scraping to obtain the main news of certain sites that are of my personal interest.
 ---
 
-# Bot de Telegram <a href="https://github.com/PabloMusaber/telegram-bot-noticias" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="githubWindow"><i class="fab fa-github"></i></a>
+# Telegram Bot <a href="https://github.com/PabloMusaber/telegram-bot-noticias" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="githubWindow"><i class="fab fa-github"></i></a>
 
-Este bot responde a comandos enviados a través del chat, y era empleado para obtener las noticias principales de Xataka, iProUP e Infobae a partir de scripts de **web scraping**. Actualmente se encuentra fuera de servicio debido a que ya no lo utilizo.
+This bot responds to commands sent through the chat and was used to obtain the main news from Xataka, iProUP, and Infobae from **web scraping** scripts. It is currently not deployed because I no longer use it.
 
-Las noticias pueden solicitarse a partir de la interacción con los botones que aparecen con el comando **"/noticias"**.
+The news can be requested by interacting with the buttons that appear with the command **"/noticias"**.
 ![noticias](../assets/img/projects/blog_telegram/noticias.jpg)
 <br>
 
-Al presionar sobre alguno de los botones, se obtiene el listado de títulos de las últimas noticias del sitio seleccionado, del mismo modo que ocurre al utilizar los comandos. Al clickear alguno de los títulos, se abre una pestaña del navagador predeterminado con la noticia especificada.
+By clicking on any of the buttons, the list of titles of the latest news of the selected site is obtained, in the same way that occurs when using the commands. Clicking on any of the titles opens a tab of the default browser with the specified news.
 ![perfil](../assets/img/projects/blog_telegram/noticias_comando.jpg)
 
 <br>
 
-Además, con el comando **"/help** se obtiene información sobre el uso del bot.
+In addition, with the **"/help"** command, you get information about the bot.
 ![perfil](../assets/img/projects/blog_telegram/noticias_help.jpg)
 
 <br>

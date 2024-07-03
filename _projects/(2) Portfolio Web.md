@@ -1,31 +1,31 @@
 ---
-name: Portfolio Web
+name: Web Portfolio
 tools: [Java, Spring Boot, Angular]
 image: ../assets/img/projects/portfolio_web/portada.jpg
-description: Web personal construida como parte del curso Argentina Programa.
+description: Personal website built as part of the Argentina Programa course.
 ---
 
-# Portfolio Web <a href="https://pablomusaber.web.app/" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="websiteWindow"><i class="fas fa-link"></i></a>
+# Web Portfolio <a href="https://pablomusaber.web.app/" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="websiteWindow"><i class="fas fa-link"></i></a>
 
 ![admin](../assets/img/projects/portfolio_web/portfolio_web.jpg)
 
-Este sitio fue desarrollado como parte del curso [Argentina Programa](https://www.argentina.gob.ar/economia/conocimiento/argentina-programa) dictado durante el año 2022, con la estructura y requisitos solicitados. El objetivo era construir un portfolio personal que funcione como plataforma web, donde el administrador pueda iniciar sesión y realizar todas las modicaciones deseadas a la información presentada dentro del sitio.
+This site was developed as part of the [Argentina Programa](https://www.argentina.gob.ar/economia/conocimiento/argentina-programa) course dictated during the year 2022, with the structure and requirements requested. The goal was to build a personal portfolio that works as a web platform, where the administrator can log in and make all the desired modifications to the information presented within the site.
 
-El frontend de la plataforma fue realizado con **Angular**, mientras que el backend corresponde a una API desarrollada en Java con **Spring Boot** utilizando una base de datos **PostgreSQL**.
+The frontend of the platform was made with **Angular**, while the backend corresponds to an API developed in **Java with Spring Boot** using a **PostgreSQL** database.
 
 <p class="text-center">
-    <strong>Código frontend:</strong> <a href="https://github.com/PabloMusaber/frontend-portfolio" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="websiteWindow"><i class="fab fa-github"></i></a>
+    <strong>Frontend code:</strong> <a href="https://github.com/PabloMusaber/frontend-portfolio" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="websiteWindow"><i class="fab fa-github"></i></a>
 </p>
 
 <p class="text-center">
-    <strong>Código backend:</strong> <a href="https://github.com/PabloMusaber/backend-portfolio" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="websiteWindow"><i class="fab fa-github"></i></a>
+    <strong>Backend code:</strong> <a href="https://github.com/PabloMusaber/backend-portfolio" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="websiteWindow"><i class="fab fa-github"></i></a>
 </p>
 
-Como se observa en la primera imágen, al acceder como administrador, se presentan botones que permiten editar y eliminar la información en cada una de las secciones del portfolio.
+As seen in the first image, when accessing as an administrator, there are buttons that allow editing and deleting information in each of the sections of the portfolio.
 
 ![admin](../assets/img/projects/portfolio_web/admin_web.jpg)
 <br>
 
-Entre los años 2022 y 2024 el frontend se alojó en **Firebase**, mientras que el backend funcionaba gracias a los servicios de **Railway**. Hoy en día la plataforma ya no se encuentra desplegada.
+Between 2022 and 2024, the frontend was hosted on **Firebase**, while the backend was powered by **Railway** services. Today the platform is no longer deployed.
 
 <script src='https://cdn.jsdelivr.net/gh/eddymens/markdown-external-link-script@v2.0.0/main.min.js'></script>

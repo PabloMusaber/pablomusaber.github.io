@@ -1,44 +1,44 @@
 ---
-name: Blog con Ruby on Rails
+name: Ruby on Rails Blog
 tools: [Ruby, Rails, HTML, CSS]
 image: ../assets/img/projects/blog_rails/portada2.jpg
-description: Plataforma web desarrollada con el objetivo de aprender la tecnología. Permite a usuarios registrarse, comentar y publicar artículos.
+description: A web platform developed with the objective of learning the technology, allowing users to register, comment, and publish articles.
 ---
 
-# Blog con Ruby on Rails<a href="https://github.com/PabloMusaber/blog-rails" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="githubWindow"><i class="fab fa-github"></i></a>
+# Ruby on Rails Blog <a href="https://github.com/PabloMusaber/blog-rails" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="githubWindow"><i class="fab fa-github"></i></a>
 
-Este proyecto es muy sencillo, y fue desarrollado para aprender y practicar con **Ruby on Rails**. Utiliza las versiones:
+This project is very simple and was developed to learn and practice with **Ruby on Rails**. It uses the versions:
 
 - **Ruby**: 2.7.0
 - **Rails**: 6.1.4
 
-Además, las gemas utilizadas son:
+In addition, the gems used are:
 
-- **simple_form**: Simplifica la creación de formularios y la visualización de errores en los campos correspondientes.
-- **devise**: Provee autenticación de usuarios con registro, inicio de sesión, recuperación de contraseñas, manejo de sesiones y eliminación de cuentas.
-- **bootstrap**: Framework de diseño.
-- **font-awesome-sass**: Provee una amplia colección de iconos, utilizados principalmente en los botones de la aplicación.
-- **wicked_pdf**: Permite la generación de archivos PDF a partir de vistas HTML.
-- **rubocop**: Analizador y formateador de código Ruby.
+- **simple_form**: Simplifies the creation of forms and the display of errors in the corresponding fields.
+- **devise**: Provides user authentication with registration, login, password recovery, session management, and account deletion.
+- **bootstrap**: Design framework.
+- **font-awesome-sass**: Provides a wide collection of icons, mainly used in the application buttons.
+- **wicked_pdf**: Allows the generation of PDF files from HTML views.
+- **rubocop**: Ruby code analyzer and formatter.
 
 <br>
 
-Al levantar el proyecto, y luego de iniciar sesión, el usuario puede observar la lista de sus artículos creados en forma de tarjetas. Se aprecia el título, las categorías a las que pertenece dicho artículo, la fecha de creación y la foto de perfil del autor.
+After launching the project and logging in, the user can view a list of their created articles displayed as cards. Each card shows the article's title, categories, creation date, and the author's profile picture.
 ![blog-rails](../assets/img/projects/blog_rails/blog1.jpg)
 <br>
 
-El presioanr sobre el botón de "Exportar artículos como PDF", un usuario puede generar un archivo de dicho formato con todo el listado de sus artículos publicados.
+By clicking on the “Export articles as PDF” button, a user can generate a PDF file with the entire list of his published articles.
 ![blog-rails](../assets/img/projects/blog_rails/blog2.jpg)
 <br>
 
-Además, el autor de un artículo es el único usuario capaz de editar o eliminar dicho elemento, y por ende es el único capaz de visualizar los botones que permiten estas funciones.
+In addition, the author of an article is the only user able to edit or delete that item, and therefore is the only one able to display the buttons that allow these functions.
 ![blog-rails](../assets/img/projects/blog_rails/blog3.jpg)
 <br>
 
-Los artículos pueden ser comentados por cualqueir usuario, como se observa a continuación.
+The articles can be commented on by any user, as shown below.
 ![blog-rails](../assets/img/projects/blog_rails/blog4.jpg)
 <br>
 
-Por último quiero destacar, entre otras funcionalidades, la gestión de la cuenta de usuario, la cual se realiza gracias a la implementación de la gema **Devise**. Permite realizar cambios de datos personales y de foto de perfil, utilizando la contraseña para confirmar los cambios. Además, también facilita las opciones de cambio de contraseña y de eliminación de cuenta.
+Finally, I would like to highlight, among other functionalities, the user account management, which is done thanks to the implementation of the **Devise** gem. It allows to make changes to personal data and profile picture, using the password to confirm the changes. In addition, it also facilitates the options of password change and account deletion.
 
 <script src='https://cdn.jsdelivr.net/gh/eddymens/markdown-external-link-script@v2.0.0/main.min.js'></script>
