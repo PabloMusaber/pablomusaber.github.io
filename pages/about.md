@@ -5,16 +5,16 @@ permalink: /about/
 weight: 3
 ---
 
-# **Sobre mi**
+# **About Me**
 
-Mi nombre es **{{ site.author.name }}**, soy Ingeniero en Sistemas de Información egresado de la Universidad Tecnológica Nacional y vivo en Mendoza, Argentina.
+I am **{{ site.author.name }}**, and I am an **Information Systems Engineer** who graduated from the Universidad Tecnológica Nacional in Mendoza, Argentina.
 
-Soy una persona productiva y proactiva, con excelentes habilidades comunicativas. Disfruto del trabajo en equipo y de colaborar en la resolución de problemas.
+I am a productive and proactive person with excellent communication skills. I enjoy teamwork and collaborating in problem solving.
 
-Tengo un especial interés por la **creación de aplicaciones y la automatización de procesos**, lo que me llevó a desempeñarme laboralmente como desarrollador de software fullstack, con un especial interés en el backend.
+I have a special interest in **creating scalable applications and automating processes**, which led me to work as a **backend developer**.
 
 <br>
-### Tecnologías
+### Technologies
 
 <div class="mt-4">
 {% include about/technologies.html %}
@@ -22,7 +22,7 @@ Tengo un especial interés por la **creación de aplicaciones y la automatizaci�
 <br>
 <br>
 
-### Trayectoria
+### Timeline
 <div class="row">
 {% include about/timeline.html %}
 </div>
