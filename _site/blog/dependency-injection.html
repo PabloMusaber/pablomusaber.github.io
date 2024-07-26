@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<!--
+  portfolYOU Jekyll theme by Youssef Raafat
+  Free for personal and commercial use under the MIT license
+  https://github.com/YoussefRaafatNasry/portfolYOU
+-->
+
+<html lang="en" class="h-100">
+
+<head>
+
+  
+  
+  
+
+  
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="What is Dependency Injection, and how does it work?">
+  <meta property="og:description" content="A brief explanation with examples of how one of the most common and widely used design patterns works.">
+  <meta property="og:image" content="/assets/img/avatar.jpg">
+
+  <title>What is Dependency Injection, and how does it work?</title>
+  <meta name="description" content="A brief explanation with examples of how one of the most common and widely used design patterns works.">
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
+
+  <!-- Theme style -->
+  <script src="/assets/js/theme.js"></script>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+
+  <!-- Animate CSS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+
+<body class="h-100 d-flex flex-column">
+
+  <main class="flex-shrink-0 container mt-5">
+    <nav class="navbar navbar-expand-lg navbar-themed">
+
+  <div class="d-flex align-items-center"> <!-- Agregar un contenedor flexible -->
+    <a class="navbar-brand" href="/">
+      <h5><b>Pablo Musaber</b></h5>
+    </a>
+
+    <span id="theme-toggler" class="nav-item" role="button" onclick="toggleTheme()"></span>
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-1x fa-bars text-themed"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto"><a class="nav-item nav-link " href="/projects/">Projects</a>
+
+      <a class="nav-item nav-link active" href="/blog/">Blog</a>
+
+      <a class="nav-item nav-link " href="/about/">About</a>
+
+      <a class="nav-item nav-link " href="https://github.com/PabloMusaber"target="_blank"><i class="fab fa-1x fa-github"></i></a>
+
+      <a class="nav-item nav-link " href="https://www.linkedin.com/in/pablo-musaber/"target="_blank"><i class="fab fa-linkedin-in"></i></a>
+
+      <a class="nav-item nav-link " href="mailto:musaberpablo@gmail.com"target="_blank"><i class="fas fa-envelope"></i></a>
+
+      
+
+    </div>
+  </div>
+
+</nav>
+    <div class="col-lg-10 mx-auto mt-5 markdown-body">
+  <h1><b>What is Dependency Injection, and how does it work?</b></h1>
+
+<p class="post-metadata text-muted">
+  25 July 2024 -  
+  <b>4 mins read time</b>
+
+  <br>Tags: 
+    
+    <a class="text-decoration-none no-underline" href="/blog/tags#design-patterns">
+      <span class="tag badge badge-pill text-primary border border-primary">Design Patterns</span>
+    </a>
+    </p>
+
+<p><strong>Dependency Injection</strong> is one of the most widely used design patterns in modern software development, though it often goes unnoticed. It’s key to building scalable, maintainable, and testable applications.</p>
+
+<p>Let’s break down the term itself:</p>
+
+<ul>
+  <li><strong>Dependency</strong>: Refers to a relationship between two components where one relies on the other to function. In other words, a dependency is anything your code needs to work.</li>
+  <li><strong>Injection</strong>: Passing something in to be used.</li>
+</ul>
+
+<p>So, <strong>Dependency Injection</strong> means providing an external dependency to a class, rather than the class creating it itself.</p>
+
+<p><br /></p>
+
+<h3 id="why-is-dependency-injection-important">Why is dependency injection important?</h3>
+
+<p>Consider the following example where a <em>WeatherController</em> class depends on a <em>WeatherService</em>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class WeatherController : ControllerBase
+{
+    private readonly IWeatherService _weatherService;
+
+    public WeatherController()
+    {
+        _weatherService = new WeatherService();
+    }
+}
+</code></pre></div></div>
+
+<p>In this code, the controller has the <strong>responsibility</strong> of creating an instance of <em>WeatherService</em>, but, <strong>why is this not recommended?</strong></p>
+
+<ol>
+  <li><strong>Tight Coupling:</strong> The <em>WeatherController</em> is tightly coupled to the concrete implementation of <em>WeatherService</em>. This <strong>lacks flexibility</strong> because if we need to replace with a different implementation (e.g., replacing <em>WeatherService</em> with <em>MockWeatherService</em>) would require modifying the controller code, which can carry errors and consume valuable time.</li>
+  <li><strong>Hard to test</strong>: Since <em>WeatherController</em> is responsible for creating the service instance, it’s hard to mock the service class for testing purposes.</li>
+  <li><strong>Violates Dependency Inversion Principle (DPI):</strong> It states that high-level modules should not depend on low-level modules, but rather should depend on abstractions (interfaces).</li>
+  <li><strong>Violates Single Responsibility Principle (SRP)</strong>: According to SRP, a class should only have one reason to change. The controller is now responsible not just for handling HTTP requests but also for creating the service. If we change how the service is created (e.g., if new constructor parameters are added), we would need to modify the controller as well, which it shouldn’t be responsible for.</li>
+</ol>
+
+<p><br /></p>
+
+<h3 id="how-dependency-injection-solves-these-problems">How dependency injection solves these problems?</h3>
+
+<p>Now, consider this version:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class WeatherController : ControllerBase
+{
+    private readonly IWeatherService _weatherService;
+
+    public WeatherController(IWeatherService weatherService)
+    {
+        _weatherService = weatherService;
+    }
+}
+</code></pre></div></div>
+
+<p>Here, the dependency is injected into the controller’s constructor, removing the responsibility of creating the instance. This gives us several benefits:</p>
+<ol>
+  <li><strong>Flexibility:</strong> We can inject any implementation of the interface <em>IWeatherService</em> without changing the controller’s code.</li>
+  <li><strong>Testability:</strong> We can easily pass a mock in unit tests.</li>
+  <li><strong>Adherence to DIP and SRP:</strong> The controller depends on an abstraction (interface), and it’s only responsible for its main job: handling requests.</li>
+</ol>
+
+<p><br /></p>
+
+<h3 id="how-does-dependency-injection-work">How does dependency injection work?</h3>
+
+<p>Dependency Injection relies on a principle called <strong>Inversion of Control (IoC)</strong>, that consists in delegating some responsibilities in our framework, in this case, the responsibility of creating instances of our implementations.</p>
+
+<p>In C#, IoC containers are responsible for creating and managing the lifecycle of objects, like <em>WeatherService</em> in this case. We can register these dependencies in the IoC container:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Program.cs
+builder.Services.AddScoped&lt;IWeatherService, WeatherService&gt;();
+</code></pre></div></div>
+
+<p>Here, we tell the container that whenever <em>IWeatherService</em> is needed, it should provide an instance of WeatherService.</p>
+
+<p>Furthermore, we need to know that there are different methods to register dependencies and to define how long instances should live and how they’re reused during the application’s lifecycle. In .NET, some of these methods are:</p>
+<ol>
+  <li><strong>AddScoped</strong>: A new instance of the service is created once per HTTP request.</li>
+  <li><strong>AddTransient</strong>: The instances are created each time they are requested.</li>
+  <li><strong>AddSingleton</strong>: Creates a single instance throughout the application. It uses the same instance in all calls.</li>
+</ol>
+
+<p><br /></p>
+
+<h3 id="inversion-of-control-vs-dependency-injection">Inversion of Control vs. Dependency Injection</h3>
+
+<p>It’s easy to confuse Inversion of Control with Dependency Injection. In fact, in the Dependency Injection pattern <strong>we use Inversion of Control</strong>, because we allow the framework to instantiate our classes.</p>
+
+<p>On the other hand, Dependency Injection <strong>specifically refers to the way we inject the concrete implementation of an interface into a class.</strong> In other words, it’s how we set the attribute in the class that uses the interface.</p>
+
+<p><br /></p>
+
+<h3 id="types-of-dependency-injection">Types of dependency injection</h3>
+
+<p>Finally, we need to know <strong>there are different types of dependency injection</strong>. In C# we have:</p>
+<ol>
+  <li><strong>Constructor Injection</strong>: Dependencies are provided through the class constructor (as shown in the previous example). This is the most common and recommended approach.</li>
+  <li><strong>Setter Injection</strong>: Dependencies are set via properties or setter methods after the object is constructed.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class WeatherController : ControllerBase
+{
+    public IWeatherService WeatherService { get; set; }
+    // ...
+}
+</code></pre></div></div>
+
+<ol>
+  <li><strong>Interface Injection</strong>: The class implements an interface that defines methods for injecting dependencies.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Interface that has a method to inject the WeatherService
+public interface IWeatherServiceConsumer
+{
+    void SetWeatherService(IWeatherService weatherService);
+}
+
+// The controller implements the consumer interface and defines the method
+public class WeatherController : ControllerBase, IWeatherServiceConsumer
+{
+    private IWeatherService _weatherService;
+
+    public void SetWeatherService(IWeatherService weatherService)
+    {
+        _weatherService = weatherService;
+    }
+}
+</code></pre></div></div>
+
+<p>Both in Java and in C#, <strong>constructor injection</strong> is the most used for several reasons:</p>
+<ol>
+  <li><strong>Required Dependencies</strong>: It ensures that all necessary dependencies are provided at the time of object creation.</li>
+  <li><strong>Readability</strong>: All dependencies are clearly visible through the constructor parameters.</li>
+  <li><strong>Testability</strong>: Makes it easy to pass mock dependencies during testing.</li>
+  <li><strong>Consistency</strong>: Once injected, dependencies remain consistent throughout the object’s lifecycle, preventing accidental changes.</li>
+</ol>
+
+
+
+</div>
+  </main>
+  <footer class="mt-auto py-3 text-center">
+
+  <small class="text-muted mb-2">
+    Using the <a href="https://jekyllrb.com/" target=”jekyll”>Jekyll</a> theme <a
+      href="https://github.com/YoussefRaafatNasry/portfolYOU" target=”portfolYOU”>portfolYOU</a>&nbsp; - &nbsp;
+    <i class="fas fa-code"></i> <strong>Pablo Musaber</strong>
+  </small>
+
+</footer>
+
+  
+  <!-- GitHub Buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- jQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS CDN -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- wow.js CDN & Activation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+<script> new WOW().init(); </script>
+
+<!-- Initialize all tooltips -->
+<script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+</body>
+
+</html>
