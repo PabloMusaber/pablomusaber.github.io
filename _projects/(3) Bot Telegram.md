@@ -4,10 +4,8 @@ tools: [Python]
 image: ../assets/img/projects/blog_telegram/portada.jpg
 date: 2022-12-05
 description: It uses web scraping to obtain the main news of certain sites that are of my personal interest.
+github_repository: https://github.com/PabloMusaber/telegram-bot-noticias
 ---
-
-# Telegram Bot <a href="https://github.com/PabloMusaber/telegram-bot-noticias" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="githubWindow"><i class="fab fa-github"></i></a>
-
 This bot responds to commands sent through the chat and was used to obtain the main news from Xataka, iProUP, and Infobae from **web scraping** scripts. It is currently not deployed because I no longer use it.
 
 The news can be requested by interacting with the buttons that appear with the command **"/noticias"**.

@@ -4,10 +4,8 @@ tools: [Ruby, Rails, HTML, CSS]
 image: ../assets/img/projects/blog_rails/portada2.jpg
 date: 2023-08-13
 description: A web platform developed with the objective of learning the technology, allowing users to register, comment, and publish articles.
+github_repository: https://github.com/PabloMusaber/blog-rails
 ---
-
-# Ruby on Rails Blog <a href="https://github.com/PabloMusaber/blog-rails" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="githubWindow"><i class="fab fa-github"></i></a>
-
 This project is very simple and was developed to learn and practice with **Ruby on Rails**. It uses the versions:
 
 - **Ruby**: 2.7.0

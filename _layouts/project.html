@@ -1,0 +1,42 @@
+---
+layout: page
+---
+{%- if page.github_repository != null -%}
+<h1>
+    <b>{{ page.name }} </b><a href="{{ page.github_repository }}" style="color: #6c757d"
+    onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'"
+    target="githubWindow"><i class="fab fa-github"></i></a></h1>
+{%- else -%}
+<h1>{{ page.name }} </h1>
+{%- endif -%}
+<p class="post-metadata text-muted">
+  {{ page.date | date_to_long_string }} -
+  <b>
+  {%- assign words = content | number_of_words -%}
+  {%- if words < 360 -%}
+    less than 1 min read time
+  {%- else -%}
+    {{ words | divided_by: 180 }} mins read time
+  {%- endif -%}
+  </b>
+
+  <br>
+
+  {%- if page.tools != empty -%}
+    Tags:
+    {% for tool in page.tools %}
+    <a class="text-decoration-none no-underline">
+      <span class="tag badge badge-pill text-primary border border-primary">{{ tool }}</span>
+    </a>
+    {% endfor %}
+  {%- endif -%}
+
+</p>
+
+{{ content }}
+
+{% if page.comments %}
+<div class="pt-5">
+  {% include blog/disqus.html %}
+</div>
+{% endif %}
