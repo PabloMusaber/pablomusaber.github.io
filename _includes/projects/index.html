@@ -35,7 +35,8 @@
   {% endfor %}
 
   <!-- Local Projects -->
-  {% for project in site.projects %}
+  {% assign sorted_projects = site.projects | sort: 'path' %}
+  {% for project in sorted_projects %}
 
     {%- assign project_type  = "local" -%}
     {%- assign project_id    = project.name | slugify -%}
