@@ -5,9 +5,6 @@ image: ../assets/img/projects/portfolio_web/portada.jpg
 date: 2022-07-25
 description: Personal website built as part of the Argentina Programa course.
 ---
-
-# Web Portfolio <a href="https://pablomusaber.web.app/" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="websiteWindow"><i class="fas fa-link"></i></a>
-
 ![admin](../assets/img/projects/portfolio_web/portfolio_web.jpg)
 
 This site was developed as part of the [Argentina Programa](https://www.argentina.gob.ar/economia/conocimiento/argentina-programa) course dictated during the year 2022, with the structure and requirements requested. The goal was to build a personal portfolio that works as a web platform, where the administrator can log in and make all the desired modifications to the information presented within the site.
