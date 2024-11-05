@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "Microservices Architecture: Benefits, Use Cases, and a Project Example",
+      "category" : "",
+      "tags"     : "Microservices Architecture",
+      "url"      : "/blog/microservices-architecture",
+      "date"     : "2024-11-04 00:00:00 -0300"
+    } ,
+  
+    {
       "title"    : "What is Dependency Injection, and how does it work?",
       "category" : "",
       "tags"     : "Design Patterns",
