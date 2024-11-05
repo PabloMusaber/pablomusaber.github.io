@@ -2,7 +2,8 @@
 name: Twitter Bot
 tools: [Python]
 image: ../assets/img/projects/bot_twitter/portada.jpg
-description: It has the ability to post phrases and images periodically and randomly, making use of the Twitter API.
+date: 2021-07-15
+description: It has the ability to post p7hrases and images periodically and randomly, making use of the Twitter API.
 ---
 
 # Twitter Bot <a href="https://github.com/PabloMusaber/twitter-bot" style="color: #6c757d" onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'" target="githubWindow"><i class="fab fa-github"></i></a>

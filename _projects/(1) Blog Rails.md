@@ -2,6 +2,7 @@
 name: Ruby on Rails Blog
 tools: [Ruby, Rails, HTML, CSS]
 image: ../assets/img/projects/blog_rails/portada2.jpg
+date: 2023-08-13
 description: A web platform developed with the objective of learning the technology, allowing users to register, comment, and publish articles.
 ---
 

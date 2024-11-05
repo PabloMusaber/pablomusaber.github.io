@@ -2,6 +2,7 @@
 name: Web Portfolio
 tools: [Java, Spring Boot, Angular]
 image: ../assets/img/projects/portfolio_web/portada.jpg
+date: 2022-07-25
 description: Personal website built as part of the Argentina Programa course.
 ---
 

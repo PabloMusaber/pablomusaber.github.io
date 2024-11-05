@@ -2,6 +2,7 @@
 name: Telegram Bot
 tools: [Python]
 image: ../assets/img/projects/blog_telegram/portada.jpg
+date: 2022-12-05
 description: It uses web scraping to obtain the main news of certain sites that are of my personal interest.
 ---
 
