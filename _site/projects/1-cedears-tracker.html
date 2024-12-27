@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<!--
+  portfolYOU Jekyll theme by Youssef Raafat
+  Free for personal and commercial use under the MIT license
+  https://github.com/YoussefRaafatNasry/portfolYOU
+-->
+
+<html lang="en" class="h-100">
+
+<head>
+
+  
+  
+  
+
+  
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="CEDEARs Tracker">
+  <meta property="og:description" content="A microservices-based system for tracking financial assets.">
+  <meta property="og:image" content="../assets/img/projects/cedears_tracker/portada.jpg">
+
+  <title>CEDEARs Tracker</title>
+  <meta name="description" content="A microservices-based system for tracking financial assets.">
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
+
+  <!-- Theme style -->
+  <script src="/assets/js/theme.js"></script>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+
+  <!-- Animate CSS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+
+<body class="h-100 d-flex flex-column">
+
+  <main class="flex-shrink-0 container mt-5">
+    <nav class="navbar navbar-expand-lg navbar-themed">
+
+  <div class="d-flex align-items-center"> <!-- Agregar un contenedor flexible -->
+    <a class="navbar-brand" href="/">
+      <h5><b>Pablo Musaber</b></h5>
+    </a>
+
+    <span id="theme-toggler" class="nav-item" role="button" onclick="toggleTheme()"></span>
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-1x fa-bars text-themed"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto"><a class="nav-item nav-link active" href="/projects/">Projects</a>
+
+      <a class="nav-item nav-link " href="/blog/">Blog</a>
+
+      <a class="nav-item nav-link " href="/about/">About</a>
+
+      <a class="nav-item nav-link " href="https://github.com/PabloMusaber"target="_blank"><i class="fab fa-1x fa-github"></i></a>
+
+      <a class="nav-item nav-link " href="https://www.linkedin.com/in/pablo-musaber/"target="_blank"><i class="fab fa-linkedin-in"></i></a>
+
+      <a class="nav-item nav-link " href="mailto:musaberpablo@gmail.com"target="_blank"><i class="fas fa-envelope"></i></a>
+
+      
+
+    </div>
+  </div>
+
+</nav>
+    <div class="col-lg-10 mx-auto mt-5 markdown-body">
+  <h1>
+    <b>CEDEARs Tracker </b><a href="https://github.com/PabloMusaber/cedears-tracker" style="color: #6c757d"
+    onMouseOver="this.style.color='#333333'" onMouseOut="this.style.color='#6c757d'"
+    target="githubWindow"><i class="fab fa-github"></i></a></h1><p class="post-metadata text-muted">
+  20 December 2024 -
+  <b>less than 1 min read time</b>
+
+  <br>Tags:
+    
+    <a class="text-decoration-none no-underline">
+      <span class="tag badge badge-pill text-primary border border-primary">.NET</span>
+    </a>
+    
+    <a class="text-decoration-none no-underline">
+      <span class="tag badge badge-pill text-primary border border-primary">C#</span>
+    </a>
+    
+    <a class="text-decoration-none no-underline">
+      <span class="tag badge badge-pill text-primary border border-primary">Microservices Architecture</span>
+    </a>
+    
+    <a class="text-decoration-none no-underline">
+      <span class="tag badge badge-pill text-primary border border-primary">RabbitMQ</span>
+    </a>
+    </p>
+
+<p>This project was developed to practice microservices architecture and the migration process from a monolithic system to a microservices-based approach. This system consists of 4 microservices with specific responsibilities and independent databases.</p>
+
+<h5 id="1-instrument-service">1. Instrument Service</h5>
+<ul>
+  <li>Allows the creation of instruments that represent the different financial assets you want to track.</li>
+  <li>Has a database that saves instruments.</li>
+  <li>When an instrument is created, it sends this information to <em>MovementService</em> through the RabbitMQ Message Bus.</li>
+</ul>
+
+<h5 id="2-movement-service">2. Movement Service</h5>
+<ul>
+  <li>Allows the creation of movements (buy/sell) for each instrument.</li>
+  <li>Has a database that saves movements and instruments.</li>
+  <li>At the start, it retrieves all the available instruments in <em>Instrument Service</em>.</li>
+  <li>When a movement is registered, it calculates the average purchase price and sends it to <em>MarketService</em> through the RabbitMQ Message Bus.</li>
+</ul>
+
+<h5 id="3-market-service">3. Market Service</h5>
+<ul>
+  <li>Communicates with the <strong><a href="https://itatppi.github.io/ppi-official-api-docs/api/documentacionRest/">PPI API</a></strong> to get the current price for each instrument.</li>
+  <li>Has a database with the required information to generate the spreadsheet.</li>
+  <li>At the start, it retrieves all the available information in <em>Movement Service</em>.</li>
+  <li>When a movement is registered, receive the updated information for the specific instrument.</li>
+  <li>Sends the necessary information to generate the spreadsheet through the RabbitMQ Message Bus.</li>
+</ul>
+
+<h5 id="4-spreadsheet-service">4. Spreadsheet Service</h5>
+<ul>
+  <li>Sends the request to get the necessary information to generate the spreadsheet through <em>RabbitMQ</em>.</li>
+  <li>Generates the spreadsheet and sends it via <em>Telegram</em>.</li>
+  <li>Does not have any database.</li>
+</ul>
+
+<p><strong>Note:</strong> The project is called CEDEARS Tracker, but it can track any financial assets available through the PPI API.</p>
+
+<p>The <strong>solution architecture</strong> is here:
+<img src="../assets/img/projects/cedears_tracker/solution_diagram.jpeg" alt="diagram" /></p>
+
+<script src="https://cdn.jsdelivr.net/gh/eddymens/markdown-external-link-script@v2.0.0/main.min.js"></script>
+
+
+
+
+</div>
+  </main>
+  <footer class="mt-auto py-3 text-center">
+
+  <small class="text-muted mb-2">
+    Using the <a href="https://jekyllrb.com/" target=”jekyll”>Jekyll</a> theme <a
+      href="https://github.com/YoussefRaafatNasry/portfolYOU" target=”portfolYOU”>portfolYOU</a>&nbsp; - &nbsp;
+    <i class="fas fa-code"></i> <strong>Pablo Musaber</strong>
+  </small>
+
+</footer>
+
+  
+  <!-- GitHub Buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- jQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS CDN -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- wow.js CDN & Activation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+<script> new WOW().init(); </script>
+
+<!-- Initialize all tooltips -->
+<script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+</body>
+
+</html>
