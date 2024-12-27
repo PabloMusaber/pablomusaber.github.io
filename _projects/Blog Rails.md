@@ -3,7 +3,7 @@ name: Ruby on Rails Blog
 tools: [Ruby, Rails, HTML, CSS]
 image: ../assets/img/projects/blog_rails/portada.jpg
 date: 2023-08-13
-description: A web platform developed with the objective of learning the technology, allowing users to register, comment, and publish articles.
+description: A web platform developed with the goal of learning the framework.
 github_repository: https://github.com/PabloMusaber/blog-rails
 ---
 This project is very simple and was developed to learn and practice with **Ruby on Rails**. It uses the versions:
