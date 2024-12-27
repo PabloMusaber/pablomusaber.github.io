@@ -10,7 +10,7 @@
 
         {%- assign project = repo -%}
         {%- assign words = project.name | split: '-' -%}
-        
+
         {%- capture titlecase -%}
           {%- for word in words -%}
             {{ word | capitalize | append: ' ' }}
@@ -35,7 +35,7 @@
   {% endfor %}
 
   <!-- Local Projects -->
-  {% assign sorted_projects = site.projects | sort: 'path' %}
+  {% assign sorted_projects = site.projects | sort: 'date' | reverse %}
   {% for project in sorted_projects %}
 
     {%- assign project_type  = "local" -%}
