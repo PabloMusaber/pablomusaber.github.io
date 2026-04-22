@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<!--
+  portfolYOU Jekyll theme by Youssef Raafat
+  Free for personal and commercial use under the MIT license
+  https://github.com/YoussefRaafatNasry/portfolYOU
+-->
+
+<html lang="en" class="h-100">
+
+<head>
+
+  
+  
+  
+
+  
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Write Skew: The Bug You Can&#39;t Reproduce">
+  <meta property="og:description" content="How a simple "create if not exists" flow silently broke under concurrency requests.">
+  <meta property="og:image" content="/assets/img/avatar.jpg">
+
+  <title>Write Skew: The Bug You Can&#39;t Reproduce</title>
+  <meta name="description" content="How a simple "create if not exists" flow silently broke under concurrency requests.">
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico">
+
+  <!-- Theme style -->
+  <script src="/assets/js/theme.js"></script>
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css">
+
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+
+  <!-- Animate CSS CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+
+<body class="h-100 d-flex flex-column">
+
+  <main class="flex-shrink-0 container mt-5">
+    <nav class="navbar navbar-expand-lg navbar-themed">
+
+  <div class="d-flex align-items-center"> <!-- Agregar un contenedor flexible -->
+    <a class="navbar-brand" href="/">
+      <h5><b>Pablo Musaber</b></h5>
+    </a>
+
+    <span id="theme-toggler" class="nav-item" role="button" onclick="toggleTheme()"></span>
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-1x fa-bars text-themed"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav ml-auto"><a class="nav-item nav-link " href="/projects/">Projects</a>
+
+      <a class="nav-item nav-link active" href="/blog/">Blog</a>
+
+      <a class="nav-item nav-link " href="https://github.com/PabloMusaber"target="_blank"><i class="fab fa-1x fa-github"></i></a>
+
+      <a class="nav-item nav-link " href="https://www.linkedin.com/in/pablo-musaber/"target="_blank"><i class="fab fa-linkedin-in"></i></a>
+
+      <a class="nav-item nav-link " href="mailto:musaberpablo@gmail.com"target="_blank"><i class="fas fa-envelope"></i></a>
+
+      
+
+    </div>
+  </div>
+
+</nav>
+    <div class="col-lg-10 mx-auto mt-5 markdown-body">
+  <h1><b>Write Skew: The Bug You Can't Reproduce</b></h1>
+
+<p class="post-metadata text-muted">
+  12 October 2025 -  
+  <b>7 mins read time</b>
+
+  <br>Tags: 
+    
+    <a class="text-decoration-none no-underline" href="/blog/tags#databases">
+      <span class="tag badge badge-pill text-primary border border-primary">Databases</span>
+    </a>
+    
+    <a class="text-decoration-none no-underline" href="/blog/tags#spring-boot">
+      <span class="tag badge badge-pill text-primary border border-primary">Spring Boot</span>
+    </a>
+    </p>
+
+<p>I remember a time when I was developing a clearly trivial flow: “create entity if none exists”. It was so simple, I had to check if an entity already exists for a customer, if not, create one.</p>
+
+<p>After weeks in QA, the release day came, and after the deploy, three of my team members went to the same customer to check this flow.</p>
+
+<p>I didn’t know it, but I was just about to discover in real life the <strong>write skew</strong>.</p>
+
+<p><br /></p>
+
+<h3 id="the-pattern">The pattern</h3>
+
+<p>Write skew is a race condition situation that follows a really simple pattern:</p>
+
+<ol>
+  <li>Transaction A reads some data and makes a decision based on it.</li>
+  <li>Transaction B reads the <strong>same</strong> data and makes a decision based on it.</li>
+  <li>Each transaction writes to <strong>different</strong> rows.</li>
+  <li>Neither write is wrong in isolation — but together they break an invariant that was true when both transactions started. (In my case, just one entity of the class I was creating was allowed to exist).</li>
+</ol>
+
+<p>The classic textbook example is the doctors-on-call problem: a hospital requires at least one doctor on call at all times. Alice sees two doctors on call and decides it’s safe to go off call. Bob sees the same two doctors on call and makes the same decision. Both transactions commit. Now there are zero doctors on call — the invariant is broken.</p>
+
+<p>In our duplicate-entity bug, the invariant is the mirror image: <strong>at most one entity per customer</strong>. Same pattern, opposite direction.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Window 1: SELECT → no entity exists  ┐
+Window 2: SELECT → no entity exists  ├─ all three see "empty" before any write
+Window 3: SELECT → no entity exists  ┘
+
+Window 1: INSERT entity  ┐
+Window 2: INSERT entity  ├─ 3 duplicates created
+Window 3: INSERT entity  ┘
+</code></pre></div></div>
+
+<p><br /></p>
+
+<hr />
+<h3 id="why-snapshot-isolation-doesnt-save-you">Why Snapshot Isolation doesn’t save you</h3>
+
+<p>Most databases default to <strong>Snapshot Isolation</strong> (called <code class="language-plaintext highlighter-rouge">REPEATABLE READ</code> in MySQL and InnoDB). Under snapshot isolation, each transaction gets a consistent snapshot of the database at the moment it started. This prevents different kinds of race conditions: dirty reads, read skew, and some lost updates.</p>
+
+<p>But write skew is still a problem, because snapshot isolation prevents a transaction from reading uncommitted changes made by concurrent transactions. <strong>It does not prevent two transactions from reading the same data</strong>, each deciding it’s safe to write, and writing to <em>different</em> rows.</p>
+
+<p>Each of the three transactions reads a clean snapshot: “no entity exists.” That’s true — at the start of each transaction, no entity existed. The problem is that the premise became false the moment any of them committed.</p>
+
+<p><strong>Snapshot isolation can’t catch this because the transactions aren’t modifying the same row. There’s no write-write conflict to detect.</strong></p>
+
+<p><br /></p>
+
+<hr />
+
+<h3 id="the-fixes">The fixes</h3>
+
+<h5 id="1-unique-constraint">1. Unique constraint</h5>
+
+<p>For the “at most one” invariant, the cleanest fix is to add a unique constraint in the table:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">entities</span> <span class="k">ADD</span> <span class="k">CONSTRAINT</span> <span class="n">unique_entity_per_customer</span> <span class="k">UNIQUE</span> <span class="p">(</span><span class="n">customer_id</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>That was the solution in our case, we completely forgot to add it at first, causing that unexpected bug.</p>
+
+<p>Now two of the three inserts fail with a constraint violation. This is the preferred approach for this specific case: it makes the invariant explicit, durable, and enforced at the database level — not something you have to remember to check in application code.</p>
+
+<p>In Spring Boot, catch the exception and handle it gracefully:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Transactional</span>
+<span class="kd">public</span> <span class="nc">CustomerEntity</span> <span class="nf">getOrCreateEntity</span><span class="o">(</span><span class="nc">Long</span> <span class="n">customerId</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">repository</span><span class="o">.</span><span class="na">findByCustomerId</span><span class="o">(</span><span class="n">customerId</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">orElseGet</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="n">repository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="k">new</span> <span class="nc">CustomerEntity</span><span class="o">(</span><span class="n">customerId</span><span class="o">));</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">DataIntegrityViolationException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="c1">// Another transaction beat us to it</span>
+                <span class="k">return</span> <span class="n">repository</span><span class="o">.</span><span class="na">findByCustomerId</span><span class="o">(</span><span class="n">customerId</span><span class="o">).</span><span class="na">orElseThrow</span><span class="o">();</span>
+            <span class="o">}</span>
+        <span class="o">});</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>On the other hand, you can use an upsert, so you never need to catch the error:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Modifying</span>
+<span class="nd">@Query</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"""
+    INSERT INTO entities (customer_id)
+    VALUES (:customerId)
+    ON DUPLICATE KEY UPDATE customer_id = customer_id
+    """</span><span class="o">,</span> <span class="n">nativeQuery</span> <span class="o">=</span> <span class="kc">true</span><span class="o">)</span>
+<span class="kt">void</span> <span class="nf">upsert</span><span class="o">(</span><span class="nd">@Param</span><span class="o">(</span><span class="s">"customerId"</span><span class="o">)</span> <span class="nc">Long</span> <span class="n">customerId</span><span class="o">);</span>
+</code></pre></div></div>
+
+<h5 id="2-select--for-update">2. SELECT … FOR UPDATE</h5>
+
+<p>This statement acquires an exclusive row lock on every row returned by the query. Any concurrent transaction that tries to read or write those rows has to wait until the lock is released.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Repository</span>
+<span class="nd">@Lock</span><span class="o">(</span><span class="nc">LockModeType</span><span class="o">.</span><span class="na">PESSIMISTIC_WRITE</span><span class="o">)</span>
+<span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">CustomerEntity</span><span class="o">&gt;</span> <span class="nf">findByCustomerId</span><span class="o">(</span><span class="nc">Long</span> <span class="n">customerId</span><span class="o">);</span>
+
+<span class="c1">// Service</span>
+<span class="nd">@Transactional</span>
+<span class="kd">public</span> <span class="nc">CustomerEntity</span> <span class="nf">getOrCreateEntity</span><span class="o">(</span><span class="nc">Long</span> <span class="n">customerId</span><span class="o">)</span> <span class="o">{</span>
+    <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">CustomerEntity</span><span class="o">&gt;</span> <span class="n">existing</span> <span class="o">=</span> <span class="n">repository</span><span class="o">.</span><span class="na">findByCustomerId</span><span class="o">(</span><span class="n">customerId</span><span class="o">);</span>
+    <span class="k">return</span> <span class="n">existing</span><span class="o">.</span><span class="na">orElseGet</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">repository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="k">new</span> <span class="nc">CustomerEntity</span><span class="o">(</span><span class="n">customerId</span><span class="o">)));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The problem with this approach is <strong>there’s no row to lock</strong> in the situation I’ve described. When your query returns zero rows, there’s nothing to put a lock on. All three transactions execute their <code class="language-plaintext highlighter-rouge">SELECT FOR UPDATE</code>, all get zero rows, all acquire no locks, and all proceed to insert.</p>
+
+<p><code class="language-plaintext highlighter-rouge">FOR UPDATE</code> is the right tool when <strong>you need to lock <em>existing</em> rows before modifying them</strong>. For the “check for absence” scenario, it doesn’t help.</p>
+
+<h5 id="3-serializable-isolation">3. SERIALIZABLE isolation</h5>
+
+<p>The only isolation level that fully prevents write skew is <code class="language-plaintext highlighter-rouge">SERIALIZABLE</code>. It guarantees that concurrent transactions produce results equivalent to running them one at a time, serially.</p>
+
+<p>In Spring Boot, apply it specifically on the methods that need it:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@Transactional</span><span class="o">(</span><span class="n">isolation</span> <span class="o">=</span> <span class="nc">Isolation</span><span class="o">.</span><span class="na">SERIALIZABLE</span><span class="o">)</span>
+<span class="kd">public</span> <span class="nc">CustomerEntity</span> <span class="nf">getOrCreateEntity</span><span class="o">(</span><span class="nc">Long</span> <span class="n">customerId</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">repository</span><span class="o">.</span><span class="na">findByCustomerId</span><span class="o">(</span><span class="n">customerId</span><span class="o">)</span>
+        <span class="o">.</span><span class="na">orElseGet</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="n">repository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="k">new</span> <span class="nc">CustomerEntity</span><span class="o">(</span><span class="n">customerId</span><span class="o">)));</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Under <code class="language-plaintext highlighter-rouge">SERIALIZABLE</code>, MySQL InnoDB promotes every plain <code class="language-plaintext highlighter-rouge">SELECT</code> to a locking read. If two transactions run this concurrently, one blocks until the other commits — and then finds the entity that was just created.</p>
+
+<p>Two important warnings:</p>
+
+<p><strong>Performance cost:</strong> <code class="language-plaintext highlighter-rouge">SERIALIZABLE</code> has a real overhead. Use it surgically on the specific method that needs it — not as a global default in <code class="language-plaintext highlighter-rouge">application.properties</code>.</p>
+
+<p><strong>Self-invocation bypasses the proxy:</strong> <code class="language-plaintext highlighter-rouge">@Transactional</code> works through a Spring AOP proxy. Calling a <code class="language-plaintext highlighter-rouge">@Transactional</code> method from within the same bean skips the proxy entirely, silently ignoring the isolation level:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// This does NOT apply SERIALIZABLE — proxy is bypassed</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">outer</span><span class="o">()</span> <span class="o">{</span>
+    <span class="k">this</span><span class="o">.</span><span class="na">getOrCreateEntity</span><span class="o">(</span><span class="n">id</span><span class="o">);</span>  <span class="c1">// ← self-invocation, isolation level ignored</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>Always call <code class="language-plaintext highlighter-rouge">@Transactional</code> methods from another bean.</strong></p>
+
+<p><br /></p>
+
+<hr />
+
+<h3 id="how-to-recognize-this-pattern">How to recognize this pattern</h3>
+
+<p>Write skew appears in any <strong>check-then-act</strong> flow on shared data:</p>
+
+<ul>
+  <li>Read a condition (the presence or absence of rows).</li>
+  <li>Make a decision based on what you read.</li>
+  <li>Write something based on that decision.</li>
+</ul>
+
+<p>The tell: <em>if two transactions ran this code simultaneously, could they each see a “safe” state that, after both commit, is no longer safe?</em></p>
+
+<p>If yes, choose your fix based on what’s actually being protected:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Invariant</th>
+      <th>Best fix</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>At most one / at least one row</td>
+      <td>Unique constraint</td>
+    </tr>
+    <tr>
+      <td>Existing rows need to be locked</td>
+      <td><code class="language-plaintext highlighter-rouge">SELECT ... FOR UPDATE</code></td>
+    </tr>
+    <tr>
+      <td>Complex multi-row invariant</td>
+      <td><code class="language-plaintext highlighter-rouge">SERIALIZABLE</code> isolation</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+</div>
+  </main>
+  <footer class="mt-auto py-3 text-center">
+
+  <small class="text-muted mb-2">
+    Using the <a href="https://jekyllrb.com/" target=”jekyll”>Jekyll</a> theme <a
+      href="https://github.com/YoussefRaafatNasry/portfolYOU" target=”portfolYOU”>portfolYOU</a>&nbsp; - &nbsp;
+    <i class="fas fa-code"></i> <strong>Pablo Musaber</strong>
+  </small>
+
+</footer>
+
+  
+  <!-- GitHub Buttons -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<!-- jQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+
+<!-- Bootstrap JS CDN -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!-- wow.js CDN & Activation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
+<script> new WOW().init(); </script>
+
+<!-- Initialize all tooltips -->
+<script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+</body>
+
+</html>

@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "Write Skew: The Bug You Can&#39;t Reproduce",
+      "category" : "",
+      "tags"     : "Databases, Spring Boot",
+      "url"      : "/blog/write-skew",
+      "date"     : "2025-10-12 00:00:00 -0300"
+    } ,
+  
+    {
       "title"    : "Microservices Architecture: Benefits, Use Cases, and a Project Example",
       "category" : "",
       "tags"     : "Microservices Architecture",
