@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "MCP Server in Java: A simple bridge to my broker",
+      "category" : "",
+      "tags"     : "Spring AI, Spring Boot, MCP",
+      "url"      : "/blog/ppi-mcp",
+      "date"     : "2026-05-22 00:00:00 -0300"
+    } ,
+  
+    {
       "title"    : "Write Skew: The Bug You Can&#39;t Reproduce",
       "category" : "",
       "tags"     : "Databases, Spring Boot",

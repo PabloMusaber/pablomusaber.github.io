@@ -3,7 +3,7 @@ title: "Write Skew: The Bug You Can't Reproduce"
 tags: [Databases, Spring Boot]
 style: border
 color:
-description: How a simple "create if not exists" flow silently broke under concurrency requests.
+description: How a ~300-line Spring Boot app on a Raspberry Pi taught Claude to pull live data straight from my broker account.
 ---
 I remember a time when I was developing a clearly trivial flow: "create entity if none exists". It was so simple, I had to check if an entity already exists for a customer, if not, create one.
 
