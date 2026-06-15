@@ -7,11 +7,13 @@ weight: 3
 
 # **About Me**
 
-I am **{{ site.author.name }}**, and I am an **Information Systems Engineer** who graduated from the Universidad Tecnológica Nacional in Mendoza, Argentina.
+Hi! I am **{{ site.author.name }}**, an Information Systems Engineer based in Mendoza 🍇 (Argentina 🇦🇷), who graduated from the Universidad Tecnológica Nacional.
 
-I am a productive and proactive person with excellent communication skills. I enjoy teamwork and collaborating in problem solving.
+I have a special interest in creating scalable **AI-powered applications** using frontier models and the latest technologies on the market.
 
-I have a special interest in **creating scalable applications and automating processes**, which led me to work as a **backend developer**.
+Besides, I enjoy working in **dynamic environments** with constant changes, where I have the opportunity to **make decisions** and share my point of view. That's why I feel really comfortable in a **startup atmosphere**.
+
+In my free time, I go to tennis lessons 🎾 and play some tournaments (I'm not Djokovic yet). I also enjoy playing football ⚽ and reading books - currently going through Andre Agassi's autobiography.
 
 <br>
 ### Technologies
