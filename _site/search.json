@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "Watson: An AI Personal Assistant built with Embabel Framework",
+      "category" : "",
+      "tags"     : "Java, Spring AI",
+      "url"      : "/blog/watson",
+      "date"     : "2026-08-31 00:00:00 -0300"
+    } ,
+  
+    {
       "title"    : "MCP Server in Java: A simple bridge to my broker",
       "category" : "",
       "tags"     : "Spring AI, Spring Boot, MCP",
